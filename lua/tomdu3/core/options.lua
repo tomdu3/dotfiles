@@ -49,3 +49,17 @@ vim.cmd("highlight ColorColumn guibg=#FFB6B1 ctermbg=lightred")
 
 -- Set colorcolumn at 80 characters
 vim.opt.colorcolumn = "80"
+
+-- Function to set 2-space tabs for specific file types
+function SetTwoSpaceTabs()
+    vim.opt_local.tabstop = 2
+    vim.opt_local.shiftwidth = 2
+end
+
+-- Autocommands to set 2-space tabs for HTML, CSS, and JavaScript
+vim.cmd([[
+  augroup SetTwoSpaceTabs
+    autocmd!
+    autocmd FileType html,css,javascript,lua call v:lua.SetTwoSpaceTabs()
+  augroup END
+]])
