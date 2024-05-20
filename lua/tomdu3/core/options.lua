@@ -63,3 +63,17 @@ vim.cmd([[
     autocmd FileType html,css,javascript,lua call v:lua.SetTwoSpaceTabs()
   augroup END
 ]])
+
+-- Function to set color columns for Python files
+function SetPythonColorColumns()
+    vim.opt_local.colorcolumn = "80,100"
+    vim.cmd("highlight ColorColumn ctermbg=red guibg=#FF0000") -- Set the color for the columns
+end
+
+-- Autocommand to set color columns for Python files
+vim.cmd([[
+  augroup SetPythonColorColumns
+    autocmd!
+    autocmd FileType python call v:lua.SetPythonColorColumns()
+  augroup END
+]])
