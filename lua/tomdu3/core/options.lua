@@ -1,5 +1,8 @@
 vim.cmd("let g:netrw_liststyle = 3")
 
+-- set ejs filetype to html
+vim.cmd("autocmd BufNewFile,BufRead *.ejs set filetype=html")
+
 local opt = vim.opt -- for conciseness
 
 -- line numbers
