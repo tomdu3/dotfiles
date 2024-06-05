@@ -10,8 +10,8 @@ opt.relativenumber = true -- show relative line numbers
 opt.number = true -- shows absolute line number on cursor line (when relative number is on)
 
 -- tabs & indentation
-opt.tabstop = 4 -- 4 spaces for tabs (prettier default)
-opt.shiftwidth = 4 -- 4 spaces for indent width
+opt.tabstop = 2 -- 2 spaces for tabs (prettier default)
+opt.shiftwidth = 2 -- 2 spaces for indent width
 opt.expandtab = true -- expand tab to spaces
 opt.autoindent = true -- copy indent from current line when starting new one
 
@@ -68,15 +68,21 @@ vim.cmd([[
 ]])
 
 -- Function to set color columns for Python files
-function SetPythonColorColumns()
+function SetPythonSettings()
+    vim.opt_local.tabstop = 4
+    vim.opt_local.shiftwidth = 4
     vim.opt_local.colorcolumn = "80,100"
-    vim.cmd("highlight ColorColumn ctermbg=red guibg=#FF0000") -- Set the color for the columns
+    -- vim.cmd("highlight ColorColumn ctermbg=red guibg=#FF0000") -- Set the color for the columns
+    vim.cmd("highlight ColorColumn ctermbg=red guibg=#FF0000") -- Set the color for the first column
+    vim.cmd("highlight ColorColumn2 ctermbg=pink guibg=#FFC0CB") -- Set the color for the second column
+    vim.cmd("match ColorColumn /\\%81v./") -- Apply the first color at column 80
+    vim.cmd("2match ColorColumn2 /\\%101v./") -- Apply the second color at column 100
 end
 
 -- Autocommand to set color columns for Python files
 vim.cmd([[
-  augroup SetPythonColorColumns
+  augroup SetPythonSettings
     autocmd!
-    autocmd FileType python call v:lua.SetPythonColorColumns()
+    autocmd FileType python call v:lua.SetPythonSettings()
   augroup END
 ]])
